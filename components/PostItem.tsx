@@ -20,8 +20,9 @@ export default function PostItem({
   likes,
   comments,
 }: PostItemProps) {
+  console.log(date);
   return (
-    <Link href={`/post/${id}`}>
+    <Link href={`/posts/${id}`}>
       <Card className="overflow-hidden">
         <div className="flex aspect-video w-full flex-col items-center justify-center bg-gray-700 text-center text-lg font-bold text-white">
           {title}
