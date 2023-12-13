@@ -4,12 +4,13 @@ import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import Logo from "@/public/bookmark.png";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function SignUp() {
   return (
-    <div className="flex w-full justify-center items-center min-h-screen">
-      <div className="flex border-2 border-gray-100 rounded-xl p-10 flex-col gap-8 text-center">
-        <div className="flex gap-2 flex-col">
+    <div className="flex w-full justify-center items-center min-h-screen p-8">
+      <Card>
+        <CardHeader>
           <Link href="/">
             <Image src={Logo} width={30} height={30} alt="logo" />
           </Link>
@@ -18,8 +19,8 @@ export default function SignUp() {
             Please enter your details below to create your account and get
             started.
           </p>
-        </div>
-        <div className="flex flex-col gap-3 items-center">
+        </CardHeader>
+        <CardContent className="flex flex-col gap-3 items-center">
           <div className="w-full flex flex-col">
             <Label className="text-left text-sm" htmlFor="name">
               Name
@@ -45,8 +46,8 @@ export default function SignUp() {
               Sign In
             </Link>
           </p>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

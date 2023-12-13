@@ -5,19 +5,20 @@ import Link from "next/link";
 import { Label } from "@radix-ui/react-label";
 import Image from "next/image";
 import Logo from "@/public/bookmark.png";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 export default function SignIn() {
   return (
     <div className="flex w-full justify-center items-center min-h-screen">
-      <div className="flex border-2 border-gray-100 rounded-xl p-10 flex-col gap-8 text-center">
-        <div className="flex flex-col items-center gap-2">
+      <Card>
+        <CardHeader className="flex flex-col items-center ">
           <Link href="/">
             <Image src={Logo} width={30} height={30} alt="logo" />
           </Link>
           <h1 className="text-3xl font-bold px-10">Welcome back!</h1>
           <p className="text-sm text-gray-400">Please enter your details</p>
-        </div>
-        <div className="flex flex-col gap-3">
+        </CardHeader>
+        <CardContent className="flex flex-col items-center gap-3">
           <div className="w-full flex flex-col">
             <Label className="text-left text-sm" htmlFor="email">
               Email
@@ -37,8 +38,8 @@ export default function SignIn() {
               Sign Up
             </Link>
           </p>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
