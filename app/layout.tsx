@@ -7,7 +7,7 @@ import { getServerSession } from "next-auth";
 import Session from "@/components/Session";
 
 const noto = Noto_Sans({ weight: ["400", "700"], subsets: ["latin"] });
-export const revalidate = 10;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Blog platform",
@@ -24,10 +24,10 @@ export default async function RootLayout({
     <html lang="kr">
       <body className={noto.className}>
         <div className="flex justify-center">
-          <div className="min-h-screen w-full max-w-7xl">
+          <div className="w-full max-w-7xl">
             <Session session={session}>
               <Nav />
-              <main className="flex h-full w-full flex-col items-center px-8">
+              <main className="flex w-full flex-col items-center px-8">
                 {children}
               </main>
             </Session>

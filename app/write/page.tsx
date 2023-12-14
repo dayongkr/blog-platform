@@ -18,7 +18,7 @@ export default function Post() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   return (
-    <div className="bgwhi flex w-full max-w-4xl flex-col justify-center gap-5">
+    <div className="flex w-full max-w-4xl flex-col justify-center gap-5 py-8">
       <input
         type="text"
         name="title"

@@ -12,6 +12,13 @@ export async function GET() {
       author: {
         select: { name: true },
       },
+      Like: {
+        select: { userId: true, postId: true },
+      },
+      Comment: {
+        select: { id: true },
+      },
+
     },
   });
   return Response.json(posts);

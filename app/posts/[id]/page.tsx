@@ -1,13 +1,48 @@
-const content = `<p><strong>Author:</strong> Jane Doe<br><strong>Date:</strong> 2023-12-10<br><strong>Likes:</strong> 120<br><strong>Comments:</strong> 30</p><p>A deep dive into the mysteries of the underwater world.</p><hr class="novel-mt-4 novel-mb-6 novel-border-t novel-border-stone-300"><h3>Description</h3><p>In this fascinating article, we explore the vast and mysterious world beneath the ocean's surface. The ocean, covering over 70% of the Earth's surface, is home to a myriad of creatures and geological wonders that have intrigued scientists and adventurers for centuries.</p><p>Join us as we delve into the depths, uncovering the secrets of this vast underwater realm. From the vibrant coral reefs teeming with life to the eerie, unexplored trenches that plunge into the ocean's darkest corners, every discovery paints a more detailed picture of our planet's most enigmatic and uncharted territory.</p><hr class="novel-mt-4 novel-mb-6 novel-border-t novel-border-stone-300"><p><strong>Read more about our oceanic adventures and discoveries at </strong><a target="_blank" rel="noopener noreferrer nofollow" class="novel-text-stone-400 novel-underline novel-underline-offset-[3px] hover:novel-text-stone-600 novel-transition-colors novel-cursor-pointer" href="http://OurWebsite.com"><strong>OurWebsite.com</strong></a><strong>.</strong></p><code><pre>{JSON.stringify(params, null, 2)}</pre></code>`;
+import { Button } from "@/components/ui/button";
+import * as dayjs from "dayjs";
+import { Heart } from "lucide-react";
+import { getServerSession } from "next-auth";
+import Comment from "@/components/Comment";
+import Like from "@/components/Like";
 
-export default function PostDetail({ params }: { params: { id: string } }) {
+export default async function PostDetail({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const {
+    id,
+    title,
+    content,
+    createdAt,
+    author: { name },
+    Like: like,
+    Comment: comments,
+  } = await fetch(
+    `http://localhost:3000/api/post?` + new URLSearchParams({ id: params.id }),
+    {
+      cache: "no-cache",
+    },
+  ).then((res) => res.json());
+  const session = await getServerSession();
   return (
-    <div>
-      <h1 className="text-4xl font-bold">PostDetail</h1>
-      <div
+    <div className="flex w-full max-w-2xl flex-col justify-center gap-8 py-20">
+      <header className="flex flex-col gap-8">
+        <h1 className="break-all text-5xl font-bold">{title}</h1>
+        <p className="text-sm font-bold">
+          {name}
+          <span className="font-normal text-gray-400">
+            {" "}
+            · {dayjs.default(createdAt).format("DD/MM/YYYY")}
+          </span>
+        </p>
+      </header>
+      <article
         dangerouslySetInnerHTML={{ __html: content }}
-        className="prose"
-      ></div>
+        className="w-ful prose prose-lg border-y border-y-gray-200 py-8"
+      />
+      <Like like={like} session={session} postId={id} />
+      <Comment comment={comments} />
     </div>
   );
 }

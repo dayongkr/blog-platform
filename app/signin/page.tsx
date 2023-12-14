@@ -58,7 +58,6 @@ export default function SignIn() {
                   if (res?.ok) {
                     router.push("/");
                   } else {
-                    console.log(res);
                     toast({
                       variant: "destructive",
                       title: "Uh oh! Something went wrong",

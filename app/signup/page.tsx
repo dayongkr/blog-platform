@@ -58,6 +58,7 @@ export default function SignUp() {
     fetch("/api/signup", {
       method: "POST",
       body: JSON.stringify({ name, email, password }),
+      cache: "no-cache",
     }).then((res) => {
       if (res.status === 200) {
         router.push("/signin");
