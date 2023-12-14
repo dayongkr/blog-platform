@@ -2,9 +2,8 @@ import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
-
 async function main() {
-  const password = await bcrypt.hash('password', 10);
+  const password = await bcrypt.hash('password', String(process.env.NEXTAUTH_SECRET).replaceAll('\\', '') as string);
   // Create users
   await prisma.user.deleteMany();
   await prisma.user.createMany({

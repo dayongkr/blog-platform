@@ -8,10 +8,14 @@ import Logo from "@/public/bookmark.png";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const { toast } = useToast();
   return (
     <div className="flex min-h-screen w-full items-center justify-center">
       <Card>
@@ -49,7 +53,20 @@ export default function SignIn() {
           <Button
             className="mt-3 w-full rounded-full"
             onClick={() => {
-              signIn("credentials", { email, password, callbackUrl: "/" });
+              signIn("credentials", { email, password, redirect: false }).then(
+                (res) => {
+                  if (res?.ok) {
+                    router.push("/");
+                  } else {
+                    console.log(res);
+                    toast({
+                      variant: "destructive",
+                      title: "Uh oh! Something went wrong",
+                      description: "Please check your Email and Password",
+                    });
+                  }
+                },
+              );
             }}
           >
             Sign in

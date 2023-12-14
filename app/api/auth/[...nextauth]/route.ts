@@ -1,6 +1,7 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/lib/prisma";
+import bcrypt from "bcrypt";
 
 const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
@@ -14,9 +15,10 @@ const handler = NextAuth({
       async authorize(credentials: Record<"email" | "password", string> | undefined) {
         const user = await prisma.user.findUnique({ where: { email: credentials?.email } });
         if (!user) return null;
-        const isValid = user.password === credentials?.password;
+        console.log(user.password, await bcrypt.hash(credentials?.password as string, process.env.NEXTAUTH_SECRET as string), credentials?.password);
+        const isValid = user.password === await bcrypt.hash(credentials?.password as string, process.env.NEXTAUTH_SECRET as string);
         if (!isValid) return null;
-        return user;
+        return { ...user, id: user.id.toString() }; // Convert id to string
       }
     })],
 })

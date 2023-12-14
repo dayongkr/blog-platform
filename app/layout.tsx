@@ -32,8 +32,8 @@ export default async function RootLayout({
               </main>
             </Session>
           </div>
-          <Toaster />
         </div>
+        <Toaster />
       </body>
     </html>
   );

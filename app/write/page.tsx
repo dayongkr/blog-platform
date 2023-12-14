@@ -30,7 +30,7 @@ export default function Post() {
       />
       <Editor
         className={
-          "border-stone-200sm:rounded-lg relative min-h-[500px] w-full sm:border sm:shadow-lg"
+          "border-stone-200sm:rounded-lg relative h-[500px] w-full overflow-y-auto sm:border sm:shadow-lg"
         }
         defaultValue={""}
         disableLocalStorage={true}
