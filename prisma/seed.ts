@@ -1,3 +1,11 @@
+/**
+ * Executes the main seeding logic.
+ * - Hashes the password
+ * - Deletes existing data
+ * - Creates 20 users
+ * - Creates 10 posts with 3-5 comments and 8-17 likes for each post
+ */
+
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import { randomInt } from 'crypto';
@@ -163,8 +171,7 @@ async function main() {
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
+  .catch(() => {
     process.exit(1);
   })
   .finally(async () => {

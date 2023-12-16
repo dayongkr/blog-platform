@@ -1,7 +1,13 @@
+/**
+ * This function takes in a number and returns its square.
+ * @param {number} num - The number to be squared.
+ * @returns {number} The square of the input number.
+ */
+import ExtraPosts from "@/components/ExtraPosts";
 import PostItem from "@/components/PostItem";
 import * as dayjs from "dayjs";
 
-interface FetchedPost {
+export interface FetchedPost {
   id: number;
   title: string;
   description: string;
@@ -17,7 +23,7 @@ interface FetchedPost {
   }[];
 }
 
-interface Post {
+export interface Post {
   id: number;
   title: string;
   description: string;
@@ -28,11 +34,17 @@ interface Post {
 }
 
 export default async function Home() {
-  const posts = await fetch("http://localhost:3000/api/posts", {
-    cache: "no-cache",
-  }).then((res) =>
+  const posts = await fetch(
+    "http://localhost:3000/api/posts?" +
+      new URLSearchParams({
+        offset: "0",
+      }),
+    {
+      cache: "no-cache",
+    },
+  ).then((res) =>
     res.json().then((data) => {
-      return data.map((post: FetchedPost) => {
+      return data.posts.map((post: FetchedPost) => {
         return {
           author: post.author.name,
           id: post.id,
@@ -50,6 +62,7 @@ export default async function Home() {
       <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {posts &&
           posts.map((post: Post) => <PostItem key={post.id} {...post} />)}
+        <ExtraPosts />
       </div>
     </main>
   );

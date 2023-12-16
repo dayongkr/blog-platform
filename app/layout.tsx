@@ -1,3 +1,8 @@
+/**
+ * Represents the root layout component for the blog platform.
+ * @param children - The child components to render within the layout.
+ * @returns The JSX element representing the root layout.
+ */
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import "./globals.css";
@@ -7,7 +12,6 @@ import { getServerSession } from "next-auth";
 import Session from "@/components/Session";
 
 const noto = Noto_Sans({ weight: ["400", "700"], subsets: ["latin"] });
-export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Blog platform",
@@ -23,16 +27,16 @@ export default async function RootLayout({
   return (
     <html lang="kr">
       <body className={noto.className}>
-        <div className="flex justify-center">
-          <div className="w-full max-w-7xl">
-            <Session session={session}>
-              <Nav />
+        <Session session={session}>
+          <div className="flex flex-col items-center justify-center">
+            <Nav />
+            <div className="w-full max-w-7xl">
               <main className="flex w-full flex-col items-center px-8">
                 {children}
               </main>
-            </Session>
+            </div>
           </div>
-        </div>
+        </Session>
         <Toaster />
       </body>
     </html>

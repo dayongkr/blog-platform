@@ -1,3 +1,10 @@
+/**
+ * Renders the sign-in page.
+ * Allows users to enter their email and password to sign in.
+ * Displays a card with a logo, input fields for email and password, and a sign-in button.
+ * If sign-in is successful, redirects to the home page.
+ * If sign-in fails, displays an error toast.
+ */
 "use client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

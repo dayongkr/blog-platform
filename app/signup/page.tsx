@@ -1,3 +1,12 @@
+/**
+ * Renders the sign-up page component.
+ * Allows users to create an account by providing their name, email, and password.
+ * Performs client-side validation on the input fields.
+ * Displays error messages if validation fails.
+ * Sends a POST request to the "/api/signup" endpoint to create the account.
+ * Redirects to the sign-in page if the account is successfully created.
+ * Displays an error toast if the account creation fails.
+ */
 "use client";
 
 import { Input } from "@/components/ui/input";

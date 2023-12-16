@@ -1,6 +1,12 @@
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
 
+/**
+ * Handles the POST request for user signup.
+ * 
+ * @param req - The request object.
+ * @returns A response object indicating the result of the signup process.
+ */
 export async function POST(req: Request) {
   const { name, email, password } = await req.json();
   const emailExists = await prisma.user.findUnique({ where: { email } });

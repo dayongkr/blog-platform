@@ -1,3 +1,17 @@
+/**
+ * Renders a single post item.
+ *
+ * @component
+ * @param {number} id - The ID of the post.
+ * @param {string} title - The title of the post.
+ * @param {string} description - The description of the post.
+ * @param {string} date - The date of the post.
+ * @param {string} author - The author of the post.
+ * @param {number} likes - The number of likes on the post.
+ * @param {number} comments - The number of comments on the post.
+ * @returns {JSX.Element} The rendered post item.
+ */
+
 import Link from "next/link";
 import { Card, CardContent, CardFooter } from "./ui/card";
 
@@ -21,9 +35,12 @@ export default function PostItem({
   comments,
 }: PostItemProps) {
   return (
-    <Link href={`/posts/${id}`}>
+    <Link
+      href={`/posts/${id}`}
+      className="duration-500 ease-in-out hover:-translate-y-3"
+    >
       <Card className="overflow-hidden">
-        <div className="flex aspect-video w-full flex-col items-center justify-center bg-gray-700 text-center text-lg font-bold text-white">
+        <div className="flex aspect-video w-full flex-col items-center justify-center bg-slate-700 text-center text-lg font-bold text-white">
           {title}
         </div>
         <CardContent className="flex flex-col gap-1 p-4">
